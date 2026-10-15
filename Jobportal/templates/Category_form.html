@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Category Form | Job Portal{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-7 col-lg-6">
+
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+
+                <h2 class="mb-4">
+                    {{ title|default:"Category Form" }}
+                </h2>
+
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div class="mb-3">
+
+                        <label class="form-label"
+                               for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% for error in field.errors %}
+                        <div class="text-danger small">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary">
+                        Save Category
+                    </button>
+
+                    <a href="{% url 'Category_list' %}"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

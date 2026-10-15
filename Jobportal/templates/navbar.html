@@ -1,0 +1,131 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+
+        <!-- Website Name -->
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+            Job Portal
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <!-- Left Side Menu -->
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'job_search' %}">
+                        Find Jobs
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Category_list' %}">
+                        Categories
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Skill_list' %}">
+                        Skills
+                    </a>
+                </li>
+
+                {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard' %}">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    {% if user.user_type == 'recruiter' %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'job_create' %}">
+                                Post a Job
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'matched_candidates' %}">
+                                Matched Candidates
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                    {% if user.user_type == 'job_seeker' %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'my_applications' %}">
+                                My Applications
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'matched_jobs' %}">
+                                Matched Jobs
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                {% endif %}
+
+            </ul>
+
+            <!-- Right Side Menu -->
+            <ul class="navbar-nav ms-auto">
+
+                {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Profile' %}">
+                            My Profile
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">
+                            Logout
+                        </a>
+                    </li>
+
+                {% else %}
+
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light me-lg-2 mb-2 mb-lg-0"
+                           href="{% url 'login' %}">
+                            Login
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-light text-primary"
+                           href="{% url 'register' %}">
+                            Register
+                        </a>
+                    </li>
+
+                {% endif %}
+
+            </ul>
+
+        </div>
+    </div>
+</nav>

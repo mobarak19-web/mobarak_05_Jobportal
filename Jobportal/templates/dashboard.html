@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Job Portal{% endblock %}
+
+{% block content %}
+
+<div class="mb-4">
+    <h2>Welcome, {{ request.user.display_name|default:request.user.username }}!</h2>
+
+    <p class="text-muted">
+        Welcome to your Job Portal dashboard.
+    </p>
+</div>
+
+<div class="row g-4">
+
+    {% if request.user.user_type == "JOBSEEKER" %}
+
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5>Find Jobs</h5>
+                <p>Explore available jobs and find the right opportunity.</p>
+
+                <a href="{% url 'job_search' %}" class="btn btn-primary">
+                    Browse Jobs
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5>My Applications</h5>
+                <p>Check the status of your job applications.</p>
+
+                <a href="{% url 'my_applications' %}"
+                   class="btn btn-success">
+                    View Applications
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5>Matched Jobs</h5>
+                <p>Explore jobs matching your skills.</p>
+
+                <a href="{% url 'matched_jobs' %}"
+                   class="btn btn-info">
+                    View Matches
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% elif request.user.user_type == "RECRUITER" %}
+
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5>Post a Job</h5>
+                <p>Create a new job opportunity for candidates.</p>
+
+                <a href="{% url 'job_create' %}"
+                   class="btn btn-primary">
+                    Post Job
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5>Manage Your Profile</h5>
+                <p>Keep your profile information up to date.</p>
+
+                <a href="{% url 'Profile' %}"
+                   class="btn btn-success">
+                    My Profile
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

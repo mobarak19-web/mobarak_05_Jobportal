@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Matched Jobs | Job Portal{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-2">Matched Jobs</h2>
+
+<p class="text-muted mb-4">
+    Jobs that may match your skills.
+</p>
+
+<div class="row g-4">
+
+    {% for job in matched_jobs %}
+
+    <div class="col-md-6">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5>{{ job.title }}</h5>
+
+                <p class="text-muted">
+                    {{ job.location }}
+                </p>
+
+                <p>
+                    {{ job.description|truncatewords:25 }}
+                </p>
+
+                <a href="{% url 'job_detail' job.pk %}"
+                   class="btn btn-primary">
+                    View Job
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+        <div class="alert alert-info">
+            No matched jobs found. Update your profile skills and try again.
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

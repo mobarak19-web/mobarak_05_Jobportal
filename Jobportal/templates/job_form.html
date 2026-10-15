@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title|default:"Job Form" }} | Job Portal{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body p-4">
+
+                <h2 class="mb-4">
+                    {{ title|default:"Create Job" }}
+                </h2>
+
+                <form method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    {% for field in form %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label"
+                               for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.help_text %}
+                        <div class="form-text">
+                            {{ field.help_text }}
+                        </div>
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                        <div class="text-danger small">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary">
+                        Save Job
+                    </button>
+
+                    <a href="{% url 'job_search' %}"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
